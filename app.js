@@ -75,3 +75,16 @@ function updateProgress(){const n=progress.keys.size;$('progress-count').textCon
 $('progress-button').onclick=()=>{$('progress-dialog').showModal();};$('close-progress').onclick=()=>$('progress-dialog').close();
 window.addEventListener('storage',e=>{if(e.key==='platonic-solids:clears:v1'||e.key===null){const latest=loadProgress(storage,validKeys);progress.keys=latest.keys;updateProgress();}});
 updateChoices();newChallenge();resize();
+
+// Record one visit per page load without waiting for the response or retrying.
+try {
+  fetch('https://script.google.com/macros/s/AKfycbxssCIHsD-N97SHxNC_GN0ihYeC0qy-lb-EY0KmSs6Gnztaph1sITMerLVEnNWOGkYc/exec?app=platonic-solids', {
+    method: 'GET',
+    mode: 'no-cors',
+    cache: 'no-store',
+    credentials: 'omit',
+    keepalive: true,
+  }).catch(() => {});
+} catch {
+  // Access logging must never interrupt the app.
+}
